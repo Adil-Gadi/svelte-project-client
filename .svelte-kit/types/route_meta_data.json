@@ -1,0 +1,14 @@
+{
+	"/": [
+		"src/routes/+page.server.ts"
+	],
+	"/login": [
+		"src/routes/login/+page.server.ts"
+	],
+	"/posts/[postId]": [
+		"src/routes/posts/[postId]/+page.server.ts"
+	],
+	"/signup": [
+		"src/routes/signup/+page.server.ts"
+	]
+}
