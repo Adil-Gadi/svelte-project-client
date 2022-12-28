@@ -16,7 +16,7 @@
 	<a class="ml-3" href="/login">Login</a>
 </div>
 
-<div class="container mx-auto mt-[6rem]">
+<div class="container px-4 mx-auto mt-[6rem]">
 	<slot />
 </div>
 

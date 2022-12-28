@@ -5,6 +5,7 @@
 	export let maxlength: number | undefined = undefined;
 	export let min: string | undefined = undefined;
 	export let max: string | undefined = undefined;
+	export let required = false;
 	export let type: 'email' | 'password' | 'text' = 'text';
 	let className: string = '';
 
@@ -21,6 +22,7 @@
 		{placeholder}
 		bind:value
 		type="email"
+		{required}
 	/>
 {:else if type === 'password'}
 	<input
@@ -32,6 +34,7 @@
 		{placeholder}
 		bind:value
 		type="password"
+		{required}
 	/>
 {:else}
 	<input
@@ -43,6 +46,7 @@
 		{placeholder}
 		bind:value
 		type="text"
+		{required}
 	/>
 {/if}
 
