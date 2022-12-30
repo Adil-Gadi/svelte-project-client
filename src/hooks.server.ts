@@ -1,7 +1,7 @@
 import { config } from 'dotenv';
 config();
 
-import type { Handle } from '@sveltejs/kit';
+import { redirect, type Handle } from '@sveltejs/kit';
 import { verify } from 'jsonwebtoken';
 
 export const handle = (async ({ event, resolve }) => {
@@ -10,10 +10,16 @@ export const handle = (async ({ event, resolve }) => {
 		event.cookies.delete('access_token');
 	} else {
 		try {
-			const decoded = verify(webToken, process.env.JWT_SECRET);
-			console.log(decoded);
+			event.locals.userId = verify(webToken, process.env.JWT_SECRET);
+			event.locals.token = webToken;
 		} catch (error) {
 			event.cookies.delete('access_token');
+		}
+	}
+
+	if (!event.cookies.get('access_token')) {
+		if (event.url.pathname !== '/login' && event.url.pathname !== '/signup') {
+			throw redirect(307, '/signup');
 		}
 	}
 

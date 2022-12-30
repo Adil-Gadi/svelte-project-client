@@ -52,10 +52,6 @@
 
 <style>
 	input {
-		@apply border-2 border-slate-400 p-2 rounded-md w-full;
-	}
-
-	input:focus {
-		@apply border-slate-600 outline-none;
+		@apply border-b-2 border-gray-700  p-2  w-full;
 	}
 </style>

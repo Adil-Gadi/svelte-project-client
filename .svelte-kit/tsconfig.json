@@ -8,6 +8,9 @@
 			"@lib/*": [
 				"src/lib/*"
 			],
+			"@partials/*": [
+				"src/partials/*"
+			],
 			"$lib": [
 				"src/lib"
 			],
