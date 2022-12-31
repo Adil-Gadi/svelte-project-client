@@ -1,55 +1,61 @@
 <script lang="ts">
+	import type { PageData } from './$types';
 	import { goto } from '$app/navigation';
 	import Button from '@components/Button/Button.svelte';
 	import TextInput from '@components/TextInput/TextInput.svelte';
 	import getCookie from '@lib/getCookie';
 	import sendGQL from '@lib/sendGQL';
 
-	let title = '';
-	let content = '';
+	export let data: PageData;
 
 	let loading = false;
 
-	async function handleSubmit() {
+	const handleSubmit = async () => {
 		loading = true;
 
-		const mutation = `
+		const mutation: string = `
             mutation {
-                createPost(title: "${title}", content: "${content}") {
+                editPost(title: "${data.title}", content: "${data.content}", postId: "${data.postId}") {
                     ok
                     value
                 }
-            } 
-        `;
+            }
+	    `;
 
 		const token = getCookie('access_token');
-		const data = await sendGQL(mutation, token);
+		const res = await sendGQL(mutation, token);
 
-		if (data) {
-			console.log(data);
-			if (data.data.createPost.ok) {
+		if (res) {
+			if (res.data.editPost.ok) {
 				goto('/?posted=true');
 			}
 		}
 
 		loading = false;
-	}
+	};
 </script>
 
 <div>
 	<a href="/">&lt; Back to Home</a>
 </div>
 
-<h1 class="my-3">Create Post</h1>
+<h1 class="my-3">Edit Post</h1>
 
 <form on:submit|preventDefault={handleSubmit}>
-	<TextInput bind:value={title} required placeholder="Title" />
+	<TextInput bind:value={data.title} required placeholder="Title" />
 
 	<div class="mt-3">(Content Rendered as Markdown)</div>
 
-	<textarea bind:value={content} required class="mt-1" placeholder="Content" cols="30" rows="10" />
+	<textarea
+		bind:value={data.content}
+		required
+		class="mt-1"
+		placeholder="Content"
+		cols="30"
+		rows="10"
+	/>
 
-	<Button disabled={loading} class="mt-3" type="submit">Post</Button>
+	<Button disabled={loading} class="mt-3" type="submit">Update</Button>
 </form>
 
 <style>

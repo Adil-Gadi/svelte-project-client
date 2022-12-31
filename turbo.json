@@ -1,0 +1,14 @@
+{
+	"$schema": "https://turbo.build/schema.json",
+	"pipeline": {
+		"vite:dev": {}
+	},
+	"globalDependencies": [
+		".env",
+		"tsconfig.json",
+		"svelte.config.js",
+		"tailwind.config.cjs",
+		"vite.config.js"
+	],
+	"globalEnv": ["JWT_SECRET"]
+}

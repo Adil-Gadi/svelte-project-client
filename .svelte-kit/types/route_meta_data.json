@@ -15,6 +15,10 @@
 		"src/routes/posts/[postId]/+page.server.ts",
 		"src/routes/+layout.server.ts"
 	],
+	"/posts/[postId]/edit": [
+		"src/routes/posts/[postId]/edit/+page.server.ts",
+		"src/routes/+layout.server.ts"
+	],
 	"/signup": [
 		"src/routes/signup/+page.server.ts",
 		"src/routes/+layout.server.ts"

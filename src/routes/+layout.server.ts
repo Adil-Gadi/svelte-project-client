@@ -27,7 +27,7 @@ export const load = (async ({ cookies, locals }) => {
 	if (cookies.get('access_token')) {
 		const result = await getUserInfo(locals.userId, locals.token);
 
-		if (result) {
+		if (result && result.__typename === 'GetUserSuccess') {
 			return {
 				loggedIn: true,
 				username: result.value.username,

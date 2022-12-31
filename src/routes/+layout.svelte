@@ -22,7 +22,11 @@
 	class="w-full items-center pr-4 justify-end flex top-0 left-0 right-0 fixed h-[4rem] bg-gray-700"
 >
 	{#if data.loggedIn}
-		<div class="text-white">{data.username}</div>
+		<div>
+			<a href="/posts/create">Create Post</a>
+		</div>
+
+		<div class="text-white ml-3">{data.username}</div>
 
 		<div class="ml-3">
 			<a href="/login?logged_out=true" on:click|preventDefault={logout}>Logout</a>

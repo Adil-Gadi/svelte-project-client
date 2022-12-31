@@ -53,10 +53,10 @@
 </script>
 
 <div class="border-[1px] border-gray-300 my-2 p-2">
-	<div class="flex justify-between">
+	<div class="flex justify-between items-center">
 		<h2 class="h1">{data.title}</h2>
 		{#if data.isAuthor}
-			<Button>Edit</Button>
+			<a class="mr-2" href="/posts/{data.id}/edit">Edit</a>
 		{/if}
 	</div>
 	<div class="mt-3">
