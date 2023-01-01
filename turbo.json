@@ -1,8 +1,6 @@
 {
 	"$schema": "https://turbo.build/schema.json",
-	"pipeline": {
-		"vite:dev": {}
-	},
+	"pipeline": {},
 	"globalDependencies": [
 		".env",
 		"tsconfig.json",

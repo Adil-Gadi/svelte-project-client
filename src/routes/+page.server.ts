@@ -1,31 +1,24 @@
+import renderLatestPosts from '@lib/renderLatestPosts';
 import sendGQL from '@lib/sendGQL';
 import type { PageServerLoad } from './$types';
-import { marked } from 'marked';
-
-const renderer = {
-	image(href: string, title: string, text: string) {
-		// return `<img href="${href}" alt="${text}" >`;
-		return '';
-	}
-};
-
-marked.use({ renderer });
 
 export const load = (async ({ locals }) => {
-	const data = await sendGQL(
+	const date = Date.now();
+	const res = await sendGQL(
 		`query {
-		getLatestPosts(items: 5, step: 0) {
-			id
-			title
-			content
-			createdAt
-			likes
-			hasLiked
-			author
-			edited
-			isAuthor
-			hasLiked
-			likes
+			 getLatestPosts(items: 10, step: 0, since: "${date}") {
+  				  next
+				posts {
+					id
+				title
+				content
+				createdAt
+				likes
+				hasLiked
+				author
+				edited
+				isAuthor
+			}
 		}
 
 		getUser(id: "${locals.userId}") {
@@ -42,20 +35,20 @@ export const load = (async ({ locals }) => {
 		locals.token
 	);
 
-	if (data) {
-		data.data.getLatestPosts.forEach((item: { content: string }) => {
-			item.content = marked.parse(item.content);
-		});
+	if (res) {
+		const next = res.data.getLatestPosts.next;
 
 		return {
-			getLatestPosts: data.data.getLatestPosts,
+			next,
+			getLatestPosts: renderLatestPosts(res.data.getLatestPosts.posts),
 			userInfo: {
 				loggedIn: true,
-				userId: data.data.getUser.value.id,
-				username: data.data.getUser.value.username
-			}
+				userId: res.data.getUser.value.id,
+				username: res.data.getUser.value.username
+			},
+			step: 1
 		};
 	}
 
-	return { getLatestPosts: [] };
+	return { getLatestPosts: [], step: 1 };
 }) satisfies PageServerLoad;

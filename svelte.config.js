@@ -12,7 +12,8 @@ const config = {
 		alias: {
 			'@components/*': 'src/components/*',
 			'@lib/*': 'src/lib/*',
-			'@partials/*': 'src/partials/*'
+			'@partials/*': 'src/partials/*',
+			'@interfaces/*': 'src/types/*'
 		}
 	}
 };

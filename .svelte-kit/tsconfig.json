@@ -11,6 +11,9 @@
 			"@partials/*": [
 				"src/partials/*"
 			],
+			"@interfaces/*": [
+				"src/types/*"
+			],
 			"$lib": [
 				"src/lib"
 			],

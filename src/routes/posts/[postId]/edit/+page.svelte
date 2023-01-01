@@ -14,12 +14,12 @@
 		loading = true;
 
 		const mutation: string = `
-            mutation {
-                editPost(title: "${data.title}", content: "${data.content}", postId: "${data.postId}") {
-                    ok
-                    value
-                }
-            }
+			mutation {
+				editPost(title: "${data.title}", content: "${data.content}", postId: "${data.postId}") {
+					ok
+					value
+				}
+			}
 	    `;
 
 		const token = getCookie('access_token');

@@ -1,3 +1,4 @@
+import type { User } from '@interfaces/User';
 import sendGQL from '@lib/sendGQL';
 import type { LayoutServerLoad } from './$types';
 
@@ -28,9 +29,10 @@ export const load = (async ({ cookies, locals }) => {
 		const result = await getUserInfo(locals.userId, locals.token);
 
 		if (result && result.__typename === 'GetUserSuccess') {
+			const user: User = result.value;
 			return {
 				loggedIn: true,
-				username: result.value.username,
+				username: user.username,
 				userId: locals.userId
 			};
 		}

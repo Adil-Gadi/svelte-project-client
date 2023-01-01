@@ -12,6 +12,6 @@
 
 <style>
 	button {
-		@apply px-4 py-2 rounded-md bg-gray-100 text-gray-700 text-sm;
+		@apply px-4 py-2 rounded-md bg-gray-100 text-gray-700 text-sm select-none;
 	}
 </style>
